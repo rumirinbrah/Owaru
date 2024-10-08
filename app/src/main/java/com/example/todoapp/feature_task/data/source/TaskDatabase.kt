@@ -7,7 +7,7 @@ import com.example.todoapp.feature_task.domain.model.Task
 
 
 @Database(
-    entities = [Task::class,Category::class],
+    entities = [Task::class], // Category::class
     version = 1,
     exportSchema = false
 )

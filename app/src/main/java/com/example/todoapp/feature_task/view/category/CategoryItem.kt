@@ -1,7 +1,9 @@
 package com.example.todoapp.feature_task.view.category
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -35,24 +38,32 @@ import androidx.compose.ui.unit.dp
 import com.example.todoapp.R
 import com.example.todoapp.feature_task.domain.model.Category
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CategoryItem(
     category: Category,
-    deleteCategory :(Category)->Unit
+    deleteCategory :(Category)->Unit,
+    onClick:()->Unit
 ) {
 
     val config = LocalConfiguration.current
     val size = config.screenWidthDp.dp/3
     val deleteDialog = remember{ mutableStateOf(false) }
 
-    Column(
+    Column( //deleteDialog.value = true
         Modifier
             .size(size)
             .padding(5.dp)
-            .background(MaterialTheme.colorScheme.onSecondary , RoundedCornerShape(25))
-            .clickable {
-                deleteDialog.value = true
-            },
+            .clip(RoundedCornerShape(25))
+            .background(MaterialTheme.colorScheme.secondary , RoundedCornerShape(25))
+            .combinedClickable (
+                onClick = {
+                    onClick()
+                },
+                onLongClick = {
+                    deleteDialog.value = true
+                }
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -117,6 +128,6 @@ fun CategoryItem(
 @Preview(showBackground = true)
 @Composable
 fun Tester() {
-    CategoryItem(category = Category(name = "Daily"), deleteCategory = {})
+
 }
 

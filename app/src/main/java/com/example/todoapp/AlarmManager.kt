@@ -4,11 +4,15 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.todoapp.feature_task.domain.model.Task
 import com.example.todoapp.feature_task.domain.util.Constants.NOTIFICATION_ID
 import com.example.todoapp.feature_task.domain.util.Constants.TASK_EXTRA
 import com.example.todoapp.feature_task.util.receiver.AlarmReceiver
+import java.text.SimpleDateFormat
+import java.util.Date
 
 /**
  * @author zyzz
@@ -19,9 +23,10 @@ class MyAlarmManager(
 
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-    fun scheduleAlarm(time : Long, title : String ,notificationID:Int){
+    @RequiresApi(Build.VERSION_CODES.S)
+    fun scheduleAlarm(time : Long , title : String , notificationID:Int){
 
-        Toast.makeText(context , "scheduled" , Toast.LENGTH_SHORT).show()
+        Toast.makeText(context , "Scheduled" , Toast.LENGTH_SHORT).show()
         val intent =Intent(context, AlarmReceiver::class.java)
         intent.putExtra(TASK_EXTRA,title)
         val pendingIntent = PendingIntent.getBroadcast(
@@ -30,12 +35,15 @@ class MyAlarmManager(
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
-
-        alarmManager.setExactAndAllowWhileIdle(
+        //val format = SimpleDateFormat.getDateInstance()
+        //val date = Date(time)
+        //println(format.format(date))
+        alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
             time,
             pendingIntent
         )
+
     }
 
     fun cancelAlarm(task : Task){

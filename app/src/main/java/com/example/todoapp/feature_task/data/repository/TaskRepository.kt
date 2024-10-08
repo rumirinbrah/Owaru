@@ -14,6 +14,10 @@ class TaskRepository (
         return taskDao.getTasks()
     }
 
+    override fun getTasksByCategory(category: String): Flow<List<Task>> {
+        return taskDao.getTasksByCategory(category)
+    }
+
     override suspend fun getTaskById(id: Long): Task {
         return taskDao.getTaskById(id)
     }

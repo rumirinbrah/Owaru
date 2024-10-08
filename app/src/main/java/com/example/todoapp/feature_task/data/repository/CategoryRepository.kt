@@ -14,6 +14,10 @@ class CategoryRepository(
         return categoryDao.getAllCategories()
     }
 
+    //get by category
+
+
+
     //add
     override suspend fun addCategory(category: Category) {
         categoryDao.addCategory(category)

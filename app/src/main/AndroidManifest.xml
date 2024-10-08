@@ -29,9 +29,22 @@
             </intent-filter>
         </activity>
         <receiver android:name=".feature_task.util.receiver.AlarmReceiver"/>
+<!--        Reboot receiver-->
+        <receiver android:name=".feature_task.util.receiver.RebootReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+
         <service android:name=".feature_task.util.service.AlarmService"
             android:foregroundServiceType="specialUse"
             />
     </application>
 
 </manifest>
+<!--
+<intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+-->

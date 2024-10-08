@@ -3,14 +3,11 @@ package com.example.todoapp.feature_task.view.task
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.scaleIn
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,9 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todoapp.feature_task.domain.model.Task
@@ -46,8 +41,9 @@ fun TaskItem(
 )
 {
     Card(
+        elevation = 5.dp,
         modifier = modifier
-            .height(70.dp)
+            .height(80.dp)
             .fillMaxWidth()
             .padding(5.dp)
             .animateContentSize(
@@ -55,9 +51,8 @@ fun TaskItem(
                     Spring.DampingRatioHighBouncy ,
                     Spring.StiffnessLow
                 )
-            ),
-        backgroundColor = MaterialTheme.colorScheme.onSecondary
-
+            ) ,
+        backgroundColor = MaterialTheme.colorScheme.secondary,
     ) {
         Row (
             verticalAlignment = Alignment.CenterVertically
@@ -66,7 +61,7 @@ fun TaskItem(
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(10.dp)
-                    .background(Color.White)
+                    .background(MaterialTheme.colorScheme.onBackground)
             )
 
             Row(
@@ -88,7 +83,7 @@ fun TaskItem(
                     if(task.isScheduled) {
                         Text(
                             text = task.scheduledDate?:"NONE",
-                            color = MaterialTheme.colorScheme.onBackground,
+                            color = MaterialTheme.colorScheme.onSecondary,
                             modifier = Modifier.padding(top=5.dp) ,
                             fontSize = 14.sp
                         )

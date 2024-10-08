@@ -21,6 +21,8 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -91,6 +93,9 @@ fun AddCategorySheet(
             }
         }
         Button(
+            colors= ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.secondary
+            ),
             enabled = text.trim().isNotEmpty() ,
             shape = RectangleShape ,
             modifier = Modifier
@@ -107,7 +112,7 @@ fun AddCategorySheet(
                 }
             }
         ) {
-            Text(text = "Done")
+            Text(text = "Done",color = MaterialTheme.colorScheme.onBackground)
         }
     }
 

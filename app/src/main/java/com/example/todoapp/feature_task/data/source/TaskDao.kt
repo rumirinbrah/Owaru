@@ -21,6 +21,10 @@ abstract class TaskDao {
     @Query("select * from task_table")
     abstract fun getTasks() : Flow<List<Task>>
 
+    //GET BY CATEGORIES
+    @Query("select * from task_table where category = :category")
+    abstract fun getTasksByCategory(category : String) : Flow<List<Task>>
+
     //SINGLE
     @Query("select * from task_table where id = :id")
     abstract suspend fun getTaskById(id:Long) : Task

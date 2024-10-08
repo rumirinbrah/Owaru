@@ -10,7 +10,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,11 +32,9 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -57,12 +54,11 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.example.todoapp.feature_task.domain.model.Category
 import com.example.todoapp.feature_task.view.category.CategoryViewModel
-import com.example.todoapp.ui.theme.background
-import com.example.todoapp.ui.theme.onBackground
+import com.example.todoapp.ui.theme.sheetColor
 import kotlinx.coroutines.launch
 
 @OptIn(
-    ExperimentalMaterial3Api::class , ExperimentalMaterialApi::class ,
+     ExperimentalMaterialApi::class ,
     ExperimentalFoundationApi::class
 )
 @Composable
@@ -100,7 +96,7 @@ fun HomePage(
 
     ModalBottomSheetLayout(
 
-        sheetBackgroundColor = onBackground,
+        sheetBackgroundColor = sheetColor,
         sheetShape = RoundedCornerShape(topStartPercent = 12 , topEndPercent = 12) ,
         sheetContent = {
             Column(
@@ -130,21 +126,6 @@ fun HomePage(
 
         Scaffold(
             backgroundColor = MaterialTheme.colorScheme.background ,
-            topBar = {
-                TopAppBar(title = {
-                    Row(
-                        Modifier.fillMaxWidth() ,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "OWARU" ,
-                            fontSize = 25.sp ,
-                            color = Color(0xFFAAD5E7) ,
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
-                })
-            } ,
             scaffoldState = scaffoldState ,
             floatingActionButton = {
                 Box(
@@ -170,7 +151,8 @@ fun HomePage(
             Column(
                 Modifier
                     .padding(it)
-                    .background(background)
+                    .background(MaterialTheme.colorScheme.background)
+                    .fillMaxSize()
             ) {
 
                 if (!granted) {

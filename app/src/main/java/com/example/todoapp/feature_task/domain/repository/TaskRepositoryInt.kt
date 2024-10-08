@@ -7,6 +7,8 @@ interface TaskRepositoryInt {
 
     fun getTasks() : Flow<List<Task>>
 
+    fun getTasksByCategory(category : String) : Flow<List<Task>>
+
     suspend fun getTaskById(id:Long) : Task?
 
     suspend fun addTask(task: Task)

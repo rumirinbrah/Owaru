@@ -2,11 +2,10 @@ package com.example.todoapp.feature_task.view.category
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -30,7 +29,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,17 +38,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.todoapp.ui.theme.onBackground
+import androidx.navigation.NavHostController
+import com.example.todoapp.feature_task.view.navigation.Screen
+import com.example.todoapp.feature_task.view.task.TaskViewModel
+import com.example.todoapp.ui.theme.sheetColor
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class , ExperimentalMaterialApi::class)
 @Composable
 fun AddCategoryPage(
-    categoryViewModel: CategoryViewModel
+    categoryViewModel: CategoryViewModel,
+    taskViewModel: TaskViewModel,
+    navController : NavHostController
 ) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
@@ -65,7 +66,7 @@ fun AddCategoryPage(
 
 
     ModalBottomSheetLayout(
-        sheetBackgroundColor = onBackground ,
+        sheetBackgroundColor = sheetColor,
         sheetShape = RoundedCornerShape(topStartPercent = 12 , topEndPercent = 12) ,
         sheetState = sheetState,
         sheetContent = {
@@ -90,21 +91,6 @@ fun AddCategoryPage(
     ) {
         Scaffold(
             backgroundColor = MaterialTheme.colorScheme.background ,
-            topBar = {
-                TopAppBar(title = {
-                    Row(
-                        Modifier.fillMaxWidth() ,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "OWARU" ,
-                            fontSize = 25.sp ,
-                            color = Color(0xFFAAD5E7) ,
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
-                })
-            } ,
             scaffoldState = scaffoldState ,
             floatingActionButton = {
                 Box(
@@ -133,6 +119,8 @@ fun AddCategoryPage(
         ) {
             Column(
                 Modifier.padding(it)
+                    .background(MaterialTheme.colorScheme.background)
+                    .fillMaxSize()
             ) {
                 LazyVerticalGrid(
                     modifier = Modifier.padding(10.dp),
@@ -148,6 +136,10 @@ fun AddCategoryPage(
                             category = category ,
                             deleteCategory = {
                                 categoryViewModel.deleteCategory(it)
+                            },
+                            onClick={
+                                taskViewModel.getTasksByCategory(category.name)
+                                navController.navigate(Screen.CategoryTasksScreen.route)
                             }
                         )
                     }

@@ -18,7 +18,9 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -28,8 +30,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
@@ -43,7 +43,6 @@ import com.example.todoapp.R
 import com.example.todoapp.feature_task.domain.model.Category
 import com.example.todoapp.feature_task.domain.model.Task
 import com.example.todoapp.feature_task.view.category.CategoryViewModel
-import com.example.todoapp.ui.theme.onSecondary
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.datetime.time.timepicker
@@ -151,6 +150,9 @@ fun AddTaskSheet(
             )
         }
         Button(
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.secondary
+            ),
             enabled = text.trim().isNotEmpty() ,
             shape = RectangleShape ,
             modifier = Modifier
@@ -184,7 +186,7 @@ fun AddTaskSheet(
                 pickedDate=null
             }
         ) {
-            androidx.compose.material3.Text(text = "Done")
+            androidx.compose.material3.Text(text = "Done", color = MaterialTheme.colorScheme.onBackground)
         }
     }
 
@@ -248,7 +250,7 @@ fun CategoryItem(
         modifier = Modifier
             .padding(horizontal = 5.dp)
             .clip(RoundedCornerShape(25))
-            .background(if (selected) color else onSecondary)
+            .background(if (selected) color else MaterialTheme.colorScheme.tertiary)
             .clickable {
                 onClick(item)
             }

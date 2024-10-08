@@ -32,6 +32,9 @@ class TaskViewModel @Inject constructor(
     private val _tasks = mutableStateOf<List<Task>?>(null)
     val tasks: MutableState<List<Task>?> get() = _tasks
 
+    private val _categoryTasks = mutableStateOf<List<Task>?>(null)
+    val categoryTasks : MutableState<List<Task>?> get() = _categoryTasks
+
     private var deletedTask: Task? = null
 
 
@@ -43,7 +46,7 @@ class TaskViewModel @Inject constructor(
         viewModelScope.launch {
             taskRepository.addTask(task = task)
             if (time != null) {
-                alarmManager.scheduleAlarm(time , task.task,task.notificationID!!)
+                alarmManager.scheduleAlarm(time , task.task , task.notificationID!!)
             }
         }
     }
@@ -79,6 +82,15 @@ class TaskViewModel @Inject constructor(
             .onEach {
                 _tasks.value = it
             }.launchIn(viewModelScope)
+    }
+
+    fun getTasksByCategory(category: String) {
+
+        taskRepository.getTasksByCategory(category)
+            .onEach {
+                _categoryTasks.value = it
+            }.launchIn(viewModelScope)
+
     }
 
 

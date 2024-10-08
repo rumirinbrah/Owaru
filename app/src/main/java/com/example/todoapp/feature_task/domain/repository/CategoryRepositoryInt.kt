@@ -1,6 +1,7 @@
 package com.example.todoapp.feature_task.domain.repository
 
 import com.example.todoapp.feature_task.domain.model.Category
+import com.example.todoapp.feature_task.domain.model.Task
 import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepositoryInt {
