@@ -5,3 +5,12 @@ It follows the popular MVVM android architecture & Room Database is used in this
 ![2](https://github.com/user-attachments/assets/76908c32-a343-4737-9949-a83018c475a6)
 ![3](https://github.com/user-attachments/assets/08a5bda9-ce76-4ac1-b083-9162878d60c6)
 ![4](https://github.com/user-attachments/assets/ca56177f-3867-4445-8ef5-c7132af8c8f6)
+
+Tech used -
+* HILT
+* Room Database
+* Jetpack Compose
+* Kotlin
+## ..
+The application follows MVVM android architecture. An application named "Alkaa" inspired me to develop owaru
+
