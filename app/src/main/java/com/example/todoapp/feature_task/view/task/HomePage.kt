@@ -67,6 +67,7 @@ fun HomePage(
     categoryViewModel: CategoryViewModel
 ) {
 
+
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden ,
         confirmValueChange = { it != ModalBottomSheetValue.HalfExpanded }
@@ -170,6 +171,7 @@ fun HomePage(
                             category.id ?: 0
                         }
                     ) { category ->
+
                         CategoryItem(
                             item = category ,
                             selectedCategoryId = currentCategory?.id ?: -1 ,
