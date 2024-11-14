@@ -11,6 +11,9 @@ Tech used -
 * Room Database
 * Jetpack Compose
 * Kotlin
-## ..
+
+## Issues
+The alarm gets cancelled automatically when the time is set for more than 7 days
+## Architecture
 The application follows MVVM android architecture. An application named "Alkaa" inspired me to develop owaru
 
