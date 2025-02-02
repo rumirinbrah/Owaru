@@ -16,4 +16,8 @@ Tech used -
 The alarm gets cancelled automatically when the time is set for more than 7 days
 ## Architecture
 The application follows MVVM android architecture. An application named "Alkaa" inspired me to develop owaru
+## Dependency injection
+HILT is used for di in the application which allows us to easily create database instances
+## Pre-populated data
+The application makes use of the pre-populating data in a database method to add some default data to database.
 
